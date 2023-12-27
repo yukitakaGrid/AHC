@@ -1,0 +1,26 @@
+name: Run Tests
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.x
+
+    - name: Run tests
+      run: |
+        for file in 029/tools_windows/in/*.txt; do
+          cat $file | 029/tools_windows/tester.exe python 029/tools_windows/main.py > 029/tools_windows/out.txt
+          # Add further commands or assertions as needed
+        done
