@@ -18,9 +18,13 @@ jobs:
       with:
         python-version: 3.x
 
+    - name: Make tester.exe executable
+      run: |
+        chmod +x 029/tools_windows/tester.exe
+
     - name: Run tests
       run: |
         for file in 029/tools_windows/in/*.txt; do
-          cat $file | 029/tools_windows/tester.exe python 029/tools_windows/main.py > 029/tools_windows/out.txt
+          cat "$file" | ./029/tools_windows/tester.exe python main.py > out.txt
           # Add further commands or assertions as needed
         done
